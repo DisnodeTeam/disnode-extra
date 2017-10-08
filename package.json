@@ -1,16 +1,15 @@
 {
   "name": "disnode-extra",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Extra Utilities for Disnode lib",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DisnodeTeam/disnode-extra.git"
   },
-  "author": "",
+  "author": "FireGamer3",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DisnodeTeam/disnode-extra/issues"

@@ -19,7 +19,7 @@ class BotLists {
                 baseURL: "https://bots.discord.pw/api/bots/" + config.botuserid + "/stats",
                 timeout: 1000,
                 headers: {
-                    'Authorization':'' + config.dbpw.auth 
+                    'Authorization':'' + config.dbpw.auth
                 }
             })
         }
@@ -31,31 +31,51 @@ class BotLists {
                 baseURL: "https://discordbots.org/api/bots/" + config.botuserid + "/stats",
                 timeout: 1000,
                 headers: {
-                    'Authorization':'' + config.dborg.auth 
+                    'Authorization':'' + config.dborg.auth
                 }
             })
         }
     }
     getConfig(){
-        var baseConfig = {
-            botuserid: "botuserid here",
-            dbpw: {
-                auth:"auth token for bots.discord.pw"
-            },
-            dborg:{
-                auth:"auth token for discordbots.org"
-            }
+      var baseConfig = {
+        botuserid: "botuserid here",
+        dbpw: {
+          auth:"auth token for bots.discord.pw"
+        },
+        dborg:{
+          auth:"auth token for discordbots.org"
         }
-        return JSON.stringify(baseConfig, 4);
+      }
+      return JSON.stringify(baseConfig, 4);
     }
-    postServerCount(count){
+    getStats(){
+      if(self.en){
+        if(self.enorg){
+          return self.dporg.get();
+        }
+        if(self.enpw){
+          return self.dbpw.get();
+        }
+      }else{
+          logger.Warning("BotList", "Post","Warning: Failed constructor tests. cant do posts");
+      }
+    }
+    postServerCount(count, shardID=0, totalShards=1){
         var self = this;
         if(self.en){
             if(self.enorg){
-
+              self.dporg.post({
+                server_count: count,
+                shard_id: shardID,
+                shard_count: totalShards
+              });
             }
             if(self.enpw){
-
+              self.dbpw.post({
+                server_count: count,
+                shard_id: shardID,
+                shard_count: totalShards
+              });
             }
         }else{
             logger.Warning("BotList", "Post","Warning: Failed constructor tests. cant do posts");
