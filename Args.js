@@ -10,7 +10,7 @@ class Args extends EventEmitter {
     })
   }
   ParseMessage(msg){
-    var testpref = msg.message.slice(0, this.prefix.length)[0];
+    var testpref = msg.message.slice(0, this.prefix.length);
     if(testpref == this.prefix){
       var args = {};
       var split = msg.message.split(" -");
@@ -23,8 +23,8 @@ class Args extends EventEmitter {
         args.args.push({arg: arg, data: argument.join(" ")});
       }
       args.msg = msg;
-       this.emit('message', args);
+      this.emit('message', args);
     }
-    }
+  }
 }
 module.exports = Args;
