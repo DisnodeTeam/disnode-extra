@@ -18,6 +18,11 @@ class Params extends EventEmitter {
         SpaceIndex = msg.message.indexOf(" ");
       }
       var firstWord = msg.message.substring(0, SpaceIndex);
+      if(this.prefix.length == 1){
+        firstWord = firstWord.substr(1);
+      }else {
+        firstWord = firstWord.substr(this.prefix.length - 1);
+      }
       var command = {
         msg: msg,
         params: params,

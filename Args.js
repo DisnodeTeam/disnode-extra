@@ -16,6 +16,11 @@ class Args extends EventEmitter {
       var split = msg.message.split(" -");
       args.cmd = split[0].split(" ")[0];
       args.args = [];
+      if(this.prefix.length == 1){
+        args.cmd = args.cmd.substr(1);
+      }else {
+        args.cmd = args.cmd.substr(this.prefix.length - 1);
+      }
       for (var i = 1; i < split.length; i++) {
         var argument = split[i].split(" ");
         var arg = argument[0];
